@@ -1,0 +1,1 @@
+"""Resource ORM model placeholder."""\n

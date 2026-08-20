@@ -1,0 +1,1 @@
+# DATABASE.md\n\nDatabase design notes.\n
