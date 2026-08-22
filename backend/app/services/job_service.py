@@ -1,21 +1,30 @@
 ﻿from datetime import datetime
 from typing import Any
 
-JOBS: dict[str, dict[str, Any]] = {}
+
+from sqlalchemy.orm import Session 
+from app.database.models.job import Job
+
+from  sqlalchemy.dialects.postgresql import UUID
 
 
 class JobService:
     @staticmethod
-    def list_jobs() -> list[dict[str, Any]]:
-        return list(JOBS.values())
+    def list_jobs(db:Session) -> list[Job]:
+        return db.query(Job).all()
 
     @staticmethod
-    def get_job(job_id: str) -> dict[str, Any] | None:
-        return JOBS.get(job_id)
+    def get_job(db:Session,job_id:UUID) -> Job| None:
+        return (
+            db.query(Job).filter(Job.id==job_id).first()
+        )
+        
 
     @staticmethod
-    def create_job(payload: dict[str, Any]) -> dict[str, Any]:
-        job_id = payload.get("id") or f"job-{len(JOBS) + 1:04d}"
-        job = {**payload, "id": job_id, "created_at": datetime.utcnow(), "updated_at": datetime.utcnow()}
-        JOBS[job_id] = job
+    def create_job(db:Session,payload:dict) -> Job:
+        job=Job(**payload)
+        db.add(job)
+        db.commit()
+        db.refresh(job)
+        
         return job

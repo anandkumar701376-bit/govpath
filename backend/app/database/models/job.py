@@ -1,16 +1,22 @@
-﻿from datetime import date, datetime
+﻿import uuid
+from datetime import date, datetime
 
-from sqlalchemy import Boolean, Date, DateTime, DECIMAL, Integer, String, Text
-from sqlalchemy.dialects.postgresql import UUID
+
+from sqlalchemy import Boolean, Date, DateTime, DECIMAL, Integer, String, Text,ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database.database import Base
 
-
+from sqlalchemy.dialects.postgresql import UUID
 class Job(Base):
     __tablename__ = 'jobs'
 
-    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True)
+    id: Mapped[uuid.UUID] = mapped_column(
+    UUID(as_uuid=True),
+    primary_key=True,
+    default=uuid.uuid4,
+)
+    
     job_title: Mapped[str] = mapped_column(String(200), nullable=False)
     job_code: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     organization: Mapped[str | None] = mapped_column(String(150), nullable=True)
@@ -34,8 +40,8 @@ class Job(Base):
 class JobEligibility(Base):
     __tablename__ = 'job_eligibility'
 
-    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True)
-    job_id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), nullable=False)
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True,default=uuid.uuid4)
+    job_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("jobs.id"),nullable=False)
     minimum_age: Mapped[int | None] = mapped_column(Integer, nullable=True)
     maximum_age: Mapped[int | None] = mapped_column(Integer, nullable=True)
     age_relaxation_available: Mapped[bool] = mapped_column(Boolean, default=False)
