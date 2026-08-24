@@ -4,7 +4,7 @@ from sqlalchemy import text
 from app.database.database import engine
 from app.api.auth import router as auth_router 
 from app.api.jobs import router as jobs_router
-
+from app.api.job_eligibility import router as job_eligibility_router
 
 
 app= FastAPI()
@@ -24,15 +24,9 @@ app.include_router(
     tags=["Jobs"],
 )
 
-@app.get("/db-test")
-def database_test():
-    with engine.connect() as connection:
-        result=connection.execute(text("SELECT 1"))
-        
-        return{
-            "database":"connected",
-            "result":result.scalar()
-        }
-        
-        
+
+
+app.include_router(job_eligibility_router,tags=["job Eligibility"])
+
+
 
