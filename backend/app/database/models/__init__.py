@@ -5,3 +5,4 @@ from app.database.models.study import LearningResource, Roadmap, RoadmapStage, S
 from app.database.models.user import User
 from app.database.models.revoked_token import RevokedToken
 from app.database.models.user_profile import UserProfile
+from app.database.models.bookmark import Bookmark

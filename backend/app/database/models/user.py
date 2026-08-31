@@ -97,3 +97,9 @@ class User(Base):
         uselist=False,
         cascade="all, delete-orphan",
     )
+    
+    bookmarks = relationship(
+    "Bookmark",
+    back_populates="user",
+    cascade="all, delete-orphan",
+)

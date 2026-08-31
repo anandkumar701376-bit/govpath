@@ -118,3 +118,9 @@ class Job(Base):
         uselist=False,
         cascade="all, delete-orphan",
     )
+    
+    bookmarks = relationship(
+    "Bookmark",
+    back_populates="job",
+    cascade="all, delete-orphan",
+)

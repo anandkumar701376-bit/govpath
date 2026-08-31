@@ -6,6 +6,8 @@ from app.api.auth import router as auth_router
 from app.api.jobs import router as jobs_router
 from app.api.job_eligibility import router as job_eligibility_router
 from app.api.user_profile import router as user_profile_router
+from app.api.bookmarks import router as bookmarks_router
+
 
 
 app= FastAPI()
@@ -37,3 +39,6 @@ app.include_router(
 )
 
 
+app.include_router(
+    bookmarks_router
+)
