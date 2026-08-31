@@ -7,9 +7,16 @@ from app.database.schemas.job_eligibility import (
     JobEligibilityCreate,
     JobEligibilityRead,
     JobEligibilityUpdate,
+    EligibilityCheckRead,
 )
 from app.dependencies.database import get_db
 from app.services.job_eligibility_service import JobEligibilityService
+
+from app.database.models.user import User
+from app.dependencies.auth import get_current_user
+from app.services.eligibility_matching_service import(
+    EligibilityMatchingService,
+)
 
 
 router = APIRouter()
@@ -115,3 +122,36 @@ def delete_job_eligibility(
     JobEligibilityService.delete(db, eligibility)
 
     return None
+
+@router.get(
+    "/jobs/{job_id}/eligibility/check",
+    response_model=EligibilityCheckRead,
+)
+def check_job_eligibility(
+    job_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    profile = current_user.profile
+
+    if not profile:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User profile not found",
+        )
+
+    eligibility = JobEligibilityService.get_by_job_id(
+        db,
+        job_id,
+    )
+
+    if not eligibility:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Job eligibility not found",
+        )
+
+    return EligibilityMatchingService.check_eligibility(
+        profile,
+        eligibility,
+    )

@@ -124,3 +124,14 @@ class Job(Base):
     back_populates="job",
     cascade="all, delete-orphan",
 )
+    exam_patterns = relationship(
+        "JobExamPattern",
+        back_populates="job",
+        cascade="all, delete-orphan",
+)
+
+    syllabus = relationship(
+        "JobSyllabus",
+        back_populates="job",
+        cascade="all, delete-orphan",
+)

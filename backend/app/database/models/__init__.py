@@ -6,3 +6,5 @@ from app.database.models.user import User
 from app.database.models.revoked_token import RevokedToken
 from app.database.models.user_profile import UserProfile
 from app.database.models.bookmark import Bookmark
+from app.database.models.job_exam_pattern import JobExamPattern
+from app.database.models.job_syllabus import JobSyllabus

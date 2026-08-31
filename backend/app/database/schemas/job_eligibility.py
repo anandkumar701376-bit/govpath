@@ -74,3 +74,8 @@ class JobEligibilityRead(JobEligibilityCreate):
     job_id: UUID
     created_at: datetime
     updated_at: datetime
+    
+    
+class EligibilityCheckRead(BaseModel):
+    eligible: bool
+    reasons: list[str]

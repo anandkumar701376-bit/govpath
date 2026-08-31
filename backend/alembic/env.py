@@ -5,8 +5,15 @@ from dotenv import load_dotenv
 from sqlalchemy import engine_from_config, pool
 
 from app.database.database import Base
-from app.database.models import User
-
+from app.database.models import (
+    User,
+    UserProfile,
+    Job,
+    JobEligibility,
+    Bookmark,
+    JobExamPattern,
+    JobSyllabus,
+)
 load_dotenv()
 
 config = context.config

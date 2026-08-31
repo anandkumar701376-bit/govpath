@@ -7,6 +7,11 @@ from app.api.jobs import router as jobs_router
 from app.api.job_eligibility import router as job_eligibility_router
 from app.api.user_profile import router as user_profile_router
 from app.api.bookmarks import router as bookmarks_router
+from app.api.search import router as search_router
+from app.api.job_syllabus import router as job_syllabus_router 
+from app.api.job_exam_pattern import router as job_exam_pattern_router
+
+
 
 
 
@@ -41,4 +46,17 @@ app.include_router(
 
 app.include_router(
     bookmarks_router
+)
+
+app.include_router(
+    search_router,
+    prefix="/search",
+    tags=["search"]
+)
+app.include_router(
+    job_syllabus_router,
+)
+
+app.include_router(
+    job_exam_pattern_router,
 )
