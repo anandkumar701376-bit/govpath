@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
 from app.database.database import SessionLocal
-from app.database.models.study import Roadmap, StudyTask, Subject, Topic
+from app.database.models.study import Roadmap,  Subject
 from app.database.schemas.study import SubjectCreate
 
 from app.services.subject_service import SubjectService 
@@ -107,3 +107,4 @@ def create_subject(
         "created_at": subject.created_at,
         "updated_at": subject.updated_at,
     }
+    

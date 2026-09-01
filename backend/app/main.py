@@ -11,6 +11,8 @@ from app.api.search import router as search_router
 from app.api.job_syllabus import router as job_syllabus_router 
 from app.api.job_exam_pattern import router as job_exam_pattern_router
 from app.api.study import router as study_router
+from app.api.topic import router as topic_router
+from app.api.study_task import router as study_task_router
 
 
 
@@ -61,9 +63,19 @@ app.include_router(
     job_exam_pattern_router,
     
 )
-
 app.include_router(
     study_router,
-    prefix="/study subject",
-    tags=["study_subject"]
+    prefix="/study",
+    tags=["Study"]
+)
+app.include_router(
+    topic_router,
+    prefix="/study/topics",
+    tags=["Topics"],
+)
+
+app.include_router(
+    study_task_router,
+    prefix="/study/task",
+    tags=["study Task"],
 )

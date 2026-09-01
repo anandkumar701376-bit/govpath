@@ -5,7 +5,8 @@ from sqlalchemy.orm import Session
 
 from app.database.models.job import Job
 from app.database.models.mock_test import MockTest
-from app.database.models.study import Roadmap, StudyTask
+from app.database.models.study import Roadmap
+from app.database.models.study_task import StudyTask
 from app.database.models.user import User
 
 

@@ -7,7 +7,9 @@ from sqlalchemy.orm import Session
 from app.database.database import SessionLocal
 from app.database.models.job import Job
 from app.database.models.mock_test import MockTest
-from app.database.models.study import Roadmap, StudyTask, Subject, Topic
+from app.database.models.topic import Topic
+from app.database.models.study import Roadmap,  Subject
+from app.database.models.study_task import StudyTask
 from app.database.models.user import User
 
 router = APIRouter()
