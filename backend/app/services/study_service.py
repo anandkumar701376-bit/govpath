@@ -1,1 +1,0 @@
-"""Study service layer."""\n

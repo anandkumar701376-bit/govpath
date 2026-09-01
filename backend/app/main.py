@@ -10,7 +10,7 @@ from app.api.bookmarks import router as bookmarks_router
 from app.api.search import router as search_router
 from app.api.job_syllabus import router as job_syllabus_router 
 from app.api.job_exam_pattern import router as job_exam_pattern_router
-
+from app.api.study import router as study_router
 
 
 
@@ -59,4 +59,11 @@ app.include_router(
 
 app.include_router(
     job_exam_pattern_router,
+    
+)
+
+app.include_router(
+    study_router,
+    prefix="/study subject",
+    tags=["study_subject"]
 )
